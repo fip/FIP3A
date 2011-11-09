@@ -1,0 +1,7 @@
+- Compilation 
+$ make clean 
+$ make
+
+- Utilisation
+$ ./calc_serveur
+$ ./calc_client localhost

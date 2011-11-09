@@ -1,0 +1,7 @@
+- Compilation
+$ make clean
+$ make
+
+- Utilisation
+$ ./rdict_server
+$ ./rdict_client

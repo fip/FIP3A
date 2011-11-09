@@ -1,0 +1,7 @@
+- Compilation
+$ make clean
+$ make
+
+- Utilisation
+$ ./calccomplexe_server
+$ ./calccomplexe_client
