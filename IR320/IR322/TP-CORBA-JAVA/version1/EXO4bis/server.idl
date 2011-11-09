@@ -1,0 +1,54 @@
+
+
+module tpcorba {
+  module exo4 {
+
+	exception numeroInconnu {};
+	exception dejaExistant {};
+
+
+       enum type_abonnement {forfait, consommation};
+
+        struct type_adresse {
+                long numero;
+                string rue;
+                long code_postal;
+                string ville;
+                };
+
+
+
+	interface abonne {
+
+		readonly attribute long numero;
+		readonly attribute string nom_prenom;
+
+                attribute type_abonnement abonnement;
+                attribute type_adresse    adresse;
+	};
+
+
+
+	interface gestionabonnes{
+
+	
+		void creation_abonne(in long numero,
+				    in string nom,
+				    in string prenom,
+ 				    in type_adresse adresse,
+                                    in type_abonnement abonnement,
+				    inout abonne ref)
+			raises (dejaExistant);
+
+		void resilier_abonne(in long numero)
+			raises (numeroInconnu);
+
+		void rechercher_abonne(in long numero,
+				inout abonne ref)
+			raises (numeroInconnu);
+		
+	  };
+
+	};
+
+};

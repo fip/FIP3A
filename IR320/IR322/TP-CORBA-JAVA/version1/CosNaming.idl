@@ -1,0 +1,86 @@
+// Ceci est un extrait (simplifie) du service de nom CORBA	
+//
+module CosNaming {
+
+
+    // Element de base d'un nom symbolique
+    //
+    struct NameComponent {
+	string id;
+	string kind;
+    };
+
+
+    // Nom symbolique : tableau (ou sequence)
+    // de NameComponent
+    //
+    typedef sequence<NameComponent> Name;
+
+    // Deux types de Binding : Binding sur un contexte
+    //                        et Binding sur un objet
+    //
+    enum BindingType {nobject, ncontext};
+
+
+    // Un Binding c'est un nom symbolique et un type
+    //
+    struct Binding {
+	Name binding_name;
+	BindingType binding_type;
+    };
+
+
+    // Une liste (sequence) de Binding
+    //
+    typedef sequence<Binding> BindingList;
+    
+
+    // Iterateur sur une liste de bindings
+    // next_one retourne un Binding. Tous les 
+    // Binding ont ete parcourus lorsque next_one 
+    // retourne false
+    // 
+    interface BindingIterator {
+	boolean next_one(out Binding b);
+    };
+
+
+
+    // Manipulation de Bindings a partir
+    // d'un contexte donne
+    //
+    interface NamingContext {
+	exception NotFound {};
+	exception CannotProceed {};
+	exception InvalidName {};
+	exception AlreadyBound {};
+
+
+	// Creation d'un Binding de type objet
+        //
+	void bind(in Name n, in Object obj)
+	    raises(NotFound, CannotProceed, InvalidName, AlreadyBound);
+	void rebind(in Name n, in Object obj)
+	    raises(NotFound, CannotProceed, InvalidName, AlreadyBound);
+
+	// Creation d'un Binding de type contexte
+        //
+	NamingContext bind_new_context(in Name n)
+	    raises(NotFound, AlreadyBound, CannotProceed, InvalidName);
+	NamingContext rebind_new_context(in Name n)
+	    raises(NotFound, AlreadyBound, CannotProceed, InvalidName);
+
+	// Recherche d'un Binding a partir d'un nom
+        // symbolique. Retourne une reference d'objet CORBA
+	// soit d'un objet applicatif soit d'un NamingContexte
+        //
+	Object resolve (in Name n)
+	    raises(NotFound, CannotProceed, InvalidName);
+
+	// Liste les Bindings directement accessible
+        // a partir du Namingcontext courant
+        //
+	void list(in unsigned long how_many,
+		  out BindingList bl, out BindingIterator bi);
+    };
+};

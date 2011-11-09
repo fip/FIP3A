@@ -1,0 +1,1168 @@
+
+<html>
+<head>
+<title> TP CORBA / Mapping Java
+ </title>
+</head>
+
+
+<BODY BGCOLOR="#ffffff" text="#101066" link="#000fff" vlink="#202
+0cc">
+
+
+
+<img src="bleuvert.gif">
+
+<center>
+<h2>
+TP CORBA / Mapping Java
+<p>
+<b><i>Frank Singhoff</i></b>
+</center>
+</h2>
+<br>
+<p>
+
+
+<img src="bleuvert.gif">
+<p>
+<center><b>SOMMAIRE</center></b>
+
+<h3>
+<ul>
+
+<li>
+<a href="tp.html#Ref1">I. Introduction</a>
+<br>
+<li>
+<a href="tp.html#Ref2">II. Mise en place de l'environnement</a>
+<br>
+<li>
+<a href="tp.html#Ref3">III.  Exercice 1 : premier pas</a>
+<li>
+<a href="tp.html#Ref4">IV. Exercice 2 : attributs et exceptions </a>
+<li>
+<a href="tp.html#Ref5">V. Exercice 3 : usines à objets </a>
+<li>
+<a href="tp.html#Ref6">VI. Exercice 4 : usines à objets (2), énumérations et structures</a>
+<li>
+<a href="tp.html#Ref7">VII. Exercice 5 : introduction au service de désignation CORBA</a>
+<li>
+<a href="tp.html#Ref8">VIII. Exercice 6 : construction d'une arborescence de noms </a>
+<li>
+<a href="./CORRECTION">IX. Corrections  </a>
+<li>
+<a href="./LOGICIELS">X. Logiciel à télécharger pour faire tourner le TP autre part</a>
+<li>
+<a href="tp.html#Ref13">XI. Exercice noté de CC  : systèmes de fichiers </a> 
+<li>
+<a href="tp.html#Ref9">XII. Exercice supplémentaire  2 : usine à calculatrices </a>
+<li>
+<a href="tp.html#Ref12">XIII. Exercice supplémentaire  3 : construction d'un servide d'événements</a>
+</ul>
+</h3>
+<p>
+<img src="bleuvert.gif">
+<p>
+</p>
+
+<br>
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref1">I. Introduction </a>
+</h3>
+
+
+
+L'objectif de ces exercices est
+de mettre en pratique les concepts abordés lors 
+du cours d'introduction à CORBA. Ce TP est composé de 
+5 exercices en Java. Le premier est un exemple complet
+d'un client/serveur CORBA utilisant une interface IDL
+simple. Cet exercice utilise les outils  de base
+nécessaires à la réalisation d'une application
+CORBA triviale et présente les principales règles  
+du mapping Java/IDL.
+Dans le deuxième exercice, on vous demande de compléter
+l'exemple précédent avec de nouvelles méthodes. 
+Le troisième exercice illustre le fonctionnement
+d'une usine à objets.
+Le quatrième exercice est un exercice de 
+synthèse.
+Enfin, le cinquième exercice consiste à regarder le fonctionnement
+du service de désignation de CORBA.
+
+Le standard CORBA peut etre consulte
+<A HREF="http://beru.univ-brest.fr/~singhoff//DOC/CORBA/CORBA2/corba-2.2-chapter">
+ dans ce repertoire.
+</A></tt>,
+
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref2">II. Mise en place de l'environnement</a>
+</h3>
+
+
+
+
+L'ORB que nous allons utiliser est  JACORB.
+Cet ORB
+est  conforme au standard CORBA 2.0. 
+Il implante les interfaces d'invocation statique et dynamique,
+le mapping Java ainsi que plusieurs  services d'objets
+de l'OMG.
+
+<p>
+
+<p>
+Avant de pouvoir utiliser cet ORB, vous devez mettre
+à jour votre environnement grâce aux commandes :
+
+<br>
+<br> SETUP JAVA14
+<br> SETUP JACORB
+<br>setenv CLASSPATH .:classes:$CLASSPATH
+<br>
+<br>
+Ceux-ci comprennent
+la définition de variables nécessaires au bon fonctionnement de
+l'ORB.
+
+
+
+
+
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref3">III. Exercice 1 : premier pas</a>
+</h3>
+
+
+<p>
+
+Le premier exercice consiste en un exemple simple
+d'application client/serveur CORBA. 
+ L'objet hébergé par le serveur 
+est constitué de deux méthodes (<tt>incrementer</tt> et <tt>decrementer</tt>)
+  définies dans l'interface IDL <tt>calcul</tt> (fichier <tt>server.idl</tt>).
+Dans cet exercice, vous devez  compiler et exécuter
+l'application. Pour ce faire, il faut&nbsp;:
+
+<p>
+
+
+
+
+<ul>
+<li> Récupérez tous les différents fichiers de cet exerice
+qui sont stockés
+<tt><A HREF="./EXO1">dans ce répertoire</A></tt>.
+<b>Vous les stockerez tous dans le  répertoire <tt>EXO1</tt>.
+ Pour une compilation correcte de ce programme, il est important de respecter les
+noms des répertoires</b>.
+
+<li>
+Depuis le répertoire <tt>EXO1</tt>, passez la  commande&nbsp;:
+
+<p>
+
+
+<tt>
+make 
+<p>
+</tt>
+
+<p>
+<p>
+
+pour générer les souches et squelettes ainsi que pour 
+compiler le client et le serveur.
+Le compilateur utilisé ici se nomme <tt>idl</tt>.
+Le code Java généré par le compilateur IDL est placé dans 
+le répertoire <tt>generated/tpcorba/exo1</tt>.
+Les <tt>.class</tt> Java sont placés dans 
+le répertoire <tt>classes/tpcorba/exo1</tt>.
+
+<p>
+
+<li>
+Lancer le serveur par la commande <tt>jaco tpcorba.exo1.Serveur</tt>.
+<p>
+<li>
+Enfin, lancer le client par <tt>jaco tpcorba.exo1.Client num</tt>
+où <tt>num</tt> est le nombre sur lequel le serveur doit effectuer
+le calcul. Attention&nbsp;:&nbsp;le serveur écrit sur disque la
+  référence
+de l'objet qu'il gère (fichier <tt>calcul.ref</tt>), il est 
+donc nécessaire de lancer le client et le serveur <b>dans le même
+répertoire</b>.
+
+
+</ul>
+
+<p>
+
+On vous demande de 
+regarder quelles sont les étapes que le serveur et le client
+réalisent respectivement, pour initialiser l'objet CORBA, et pour  invoquer
+les méthodes de l'objet.
+Vous regarderez plus précisément les points suivants&nbsp;:
+
+
+<p>
+
+<ol>
+
+<li> Quelles sont les interactions entre le serveur et l'OA ?
+
+<p>
+<li> Quelle est la relation entre
+la classe d'implémentation (classe <tt>calculImpl.java</tt>)
+ et le squelette (le squelette est défini
+par la  classe <tt>calculPOA.java</tt> dans le répertoire <tt>generated/tpcorba/exo1</tt>) ?
+
+
+<p>
+<li>
+Dans la souche (classe  <tt>_calculStub.java</tt>),
+où se trouvent la construction et l'émission
+de la requête vers le serveur ?
+
+
+<p>
+<li> Chercher dans le squelette (classe <tt>calculPOA.java</tt>)
+où se situent les appels à l'implémentation
+de l'objet (classe <tt>calculImpl.java</tt>).
+
+
+<p>
+<li> Enfin, identifier dans le fichier <tt>calcul.ref</tt> (fichier qui contient
+la référence d'objet) l'adresse IP où se trouve le serveur
+et  le port
+TCP utilisé pour les interactions entre les clients et le serveur.
+Vous utiliserez à cet effet la commande&nbsp;:
+
+<p>
+
+<tt>
+dior -f calcul.ref
+</tt>
+
+<p>
+qui affiche à l'écran le contenu de la référence d'objet.
+
+</ol>
+ 
+
+<br>
+<br>
+<br>
+<br>
+
+
+<p>
+
+Pour vous aider, voici un bref rappel des principales 
+règles du mapping 
+IDL/Java qui vont vous être 
+nécessaires dans ce TP (le mapping complet est
+accessible à cet <A HREF="./java-mapping"> endroit </a>) :
+
+<p>
+
+<ul>
+
+<li> Les squelettes et les souches sont  implantés par une classe Java. 
+
+<p>
+<li> A chaque type simple IDL correspond un type simple Java (dans cet 
+exercice,  les types IDL <tt>long</tt>,  <tt>double</tt> et <tt>string</tt> sont directement mappés
+ en types Java <tt>int</tt>, <tt>double</tt> et <tt>String</tt>).
+
+<p>
+<li> Pour les signatures de méthode avec des paramètres en <tt>in</tt>,
+le mapping définit une méthode IDL&nbsp;:
+
+<p>
+<tt>
+void methode(in type t);
+</tt>
+
+<p>
+en une  méthode Java&nbsp;:
+
+<p>
+<tt>
+void methode(type t);
+</tt>
+
+<p>
+
+<li> Pour les signatures de méthode avec des paramètres en <i>out</i>
+ou en <i>inout</i>, le mapping définit une méthode IDL&nbsp;:
+
+<p>
+<tt>
+void methode(out type t1, inout type t2);
+</tt>
+
+<p>
+en une  méthode Java&nbsp;:
+
+<p>
+<tt>
+void methode(typeHolder t1, typeHolder t2);
+</tt>
+
+<p>
+Où <tt>typeHolder</tt> est une classe encapsulant une variable de type <tt>type</tt>
+(attribut <tt>value</tt>). En
+effet, les paramètres sont passés par copie dans Java.
+C'est donc le  champ <tt>value</tt> de la classe <tt>typeHolder</tt> qui est
+utilisé pour véhiculer le paramètre du serveur vers le client.
+</ul>
+
+
+
+
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref4">IV. Exercice 2 : attributs et exceptions </a>
+</h3>
+
+
+
+<p>
+
+
+Pour cet exercice,
+récupérez les fichiers
+<tt><A HREF="./EXO2">de ce répertoire</A></tt>.
+<b>Vous les stockerez tous dans le  répertoire <tt>EXO2</tt>.
+</b>
+
+
+<p>
+
+On se propose dans ce deuxième exercice d'ajouter une 
+fonctionnalité de ``mémoire'' à notre calculatrice. La mémoire est 
+implantée sous la forme d'un attribut CORBA. On rappel qu'un attribut
+d'interface CORBA est une donnée encapsulée dans un objet. Un
+ attribut 
+peut être consulté et/ou modifié à distance par un client. Dans
+notre cas, il s'agit d'un attribut en lecture seule.
+Vous pourrez constater que l'attribut "memoire" du fichier IDL  est implanté
+en Java sous la forme d'une méthode de même nom . Le client, pour obtenir la valeur de cet
+attribut doit donc invoquer cette méthode.
+Dans le mapping IDL/Java, un attribut en lecture/écriture nécessite
+la production de deux méthodes dans la souche. 
+Une seule méthode est générée dans le cas d'un attribut en lecture
+(voir les souches générées pour de plus amples informations).
+
+
+
+<p>
+
+On vous demande de&nbsp;:
+
+<p>
+
+<ol>
+
+	<li>  Compléter la description IDL <tt>server.idl</tt>, en ajoutant
+		les méthodes <tt>ajouteMemoire</tt>, <tt>soustraitMemoire</tt>,
+		<tt>multiplieMemoire</tt> et <tt>miseAZero</tt> 
+ à l'interface <tt>calcul</tt>.
+		Chacune de ces méthodes prend un unique paramètre
+		en <tt>in</tt> de type <tt>double</tt> (sauf
+<tt>miseAZero</tt> qui ne prend pas de paramètre). Elles  mettent
+		à jour la mémoire mais ne renvoient pas d'information
+au client. La méthode <tt>diviseMemoire</tt> doit lever une exception en cas de tentative de division par zéro. 
+
+<p>
+Une exception CORBA est 
+un mécanisme proche d'une exception Java&nbsp;:&nbsp;une exception CORBA
+est un événement déclenché lors de l'invocation d'un objet et qui est transmis à l'invoqueur de cet objet. Invoqueur et invoqué ne sont pas nécessairement localisés sur la même machine.
+Une exception est déclarée avec le mot clef <tt>raises</tt> dans
+l'IDL. 
+Pour déclarer plusieurs exceptions dans un fichier IDL,
+il suffit de les séparer par une virgule  ; exemple : <tt>void methode() raises (exception1, exception2, ...)</tt>.
+
+<p>
+
+	<li>  Compléter la définition de la classe d'implémentation
+		dans le fichier <tt>calculImpl.java</tt>.
+<p>
+		
+	<li>  Compléter le client afin de tester les quatre  méthodes implantées. Le client doit afficher l'état initial de la mémoire, puis
+effectuer des opérations sur celle-ci. Enfin, avant de se terminer,
+il devra afficher l'état final de la mémoire.
+
+
+
+</ol>
+
+
+<br>
+PS&nbsp;:&nbsp;Les zones de code à compléter sont désignées par des étoiles.
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>
+<h3>
+<a name="Ref5">V. Exercice 3 : usine à objets</a>
+</h3>
+
+
+Nous regardons ici comment allouer dynamiquement
+des objets CORBA.
+Pour ce faire, nous allons définir une <b>usine
+à objets</b>. Une usine à objets 
+ offre des 
+services permettant de créer et gérer
+dynamiquement des objets CORBA.
+
+
+<p>
+Pour cet exercice,
+récupérez les fichiers
+<tt><A HREF="./EXO3">de ce répertoire</A></tt>.
+<b>Vous les stockerez tous dans le  répertoire <tt>EXO3</tt>.
+</b>
+
+
+<br>
+<br>
+
+Soit le fichier IDL <tt><A HREF="./EXO3/server.idl"> 
+server.idl</A></tt>. Ce fichier contient deux interfaces :
+
+<ol>
+<li> L'interface <tt>compte</tt>. 
+		<ul>
+		<li>Chaque objet de ce type modélise un compte bancaire.
+Un compte bancaire mémorise le nom du titulaire, le numéro du compte ainsi que son solde
+(cf. attributs en <tt>readonly</tt>).
+		<li> Les clients peuvent effectuer des opérations de crédit, débit sur le compte
+(méthode <tt>credit</tt> et <tt>debit</tt>).
+
+		<li> Les clients peuvent virer une somme d'un compte vers un autre (méthode
+<tt>prelevement</tt>).
+		<li> Enfin, une méthode permet au client de connaitre le nombre de 
+virement, d'opérations de  débit et de crédit effectué sur un compte (méthode
+<tt>nombre_operations</tt>).
+
+		</ul>
+<li> L'interface <tt>allocateur</tt>. La méthode <tt>nouveau_compte</tt> de cette interface 
+permet de créer dynamiquement un compte bancaire.
+La création dynamique d'un objet CORBA nécessite les mêmes opérations que la création
+des objets CORBA au lancement du serveur : allocation de l'objet puis activation auprès
+de la POA
+grâce à la méthode <tt>servant_to_reference</tt>. 
+</ol>
+
+
+
+<br>
+<p>
+<b>
+Travail à faire : 
+</b>
+
+<ol>
+<li>Complétez les classes <tt>compteImpl.java</tt> et
+<tt>allocateurImpl.java</tt> qui implantent les interfaces <tt>compte</tt> et <tt>allocateur</tt>.
+Les zones à compléter sont signalées par des étoiles.
+
+<li>Modifiez le  client afin de tester les différentes méthodes des 
+deux interfaces CORBA (PS : le client devra créer dynamiquement au moins deux comptes).
+
+</ol>
+
+<br>
+<br>
+<br>
+
+<h3>
+<a name="Ref6">VI. Exercice 4 : usines à objets (2), énumérations et structures</a>
+</h3>
+
+<br>
+
+
+
+Pour cet exercice,
+récupérez les fichiers
+<tt><A HREF="./EXO4">de ce répertoire</A></tt>.
+<b>Vous les stockerez tous dans le  répertoire <tt>EXO4</tt>.
+</b>
+
+
+<p>
+
+
+Dans cet exercice, on vous  demande, dans un premier, 
+temps d'écrire un serveur 
+qui implante les interfaces IDL contenues dans le 
+fichier <tt>server.idl</tt>.
+Dans un deuxième temps, vous regarderez comment sont projetées
+les énumérations et les structures IDL en Java.
+
+
+<p>
+Le fichier <tt>server.idl</tt> contient deux interfaces.
+L'interface <tt>abonne</tt>
+ mémorise les différentes informations d'un abonné à un
+opérateur 
+téléphonique. L'interface <tt>gestionabonnes</tt> 
+ assure la création/destruction/consultation
+des instances du
+type  <tt>abonne</tt>. L'interface <tt>gestionabonnes</tt> contient les méthodes suivantes :
+
+<ul>
+<li> La méthode <tt>creation_abonne</tt> qui permet de créer un objet CORBA
+de type <tt>abonne</tt>. 
+Cet objet CORBA est composé d'attributs 
+identifiant un abonné (un
+numéro de téléphone <b>unique</b>, un nom et un prénom).
+La référence sur l'objet CORBA créé est renvoyé
+au client par le paramètre <tt>inout ref</tt>.
+La méthode doit lever une exception 
+<tt>dejaExistant</tt> si le numéro de téléphone
+est déjà utilisé.
+
+
+<li> La méthode <tt>rechercher_abonne</tt> qui à partir d'un numéro
+de téléphone permet de récupérer la référence d'objet CORBA 
+de type <tt>abonne</tt>  associé au numéro de téléphone
+<tt>numero</tt>
+La méthode doit lever une exception 
+<tt>numeroInconnu</tt> si le numéro de téléphone
+n'existe pas.
+
+<li> La méthode <tt>resilier_abonne</tt> qui détruit l'objet CORBA
+de type <tt>abonne</tt> associé au  numéro de téléphone
+<tt>numero</tt>. 
+
+Pour détruire l'objet CORBA, il suffit de le retirer de la structure de
+donnée ou vous stockez les implémentations d'objet de type <tt>abonne</tt>.
+La méthode doit lever une exception
+<tt>numeroInconnu</tt> si le numéro de téléphone
+n'existe pas.
+
+</ul>
+<br>
+<br>
+
+<p>
+
+<p>
+
+<b>Travail à faire :</b>
+
+<ol>
+
+<li> Proposez un serveur (classes <tt>abonneImpl.java</tt>,  <tt>gestionabonnesImpl.java</tt> 
+et <tt>Serveur.java</tt>)
+qui implante le fichier IDL <tt>server.idl</tt>.
+
+<li> Testez votre serveur avec le client <tt>Client.java</tt>.
+</ol>
+
+
+<p>
+ On souhaite enrichir les informations de cet annuaire en ajoutant pour chaque 
+abonné son adresse et son mode de facturation (facturation au forfait ou selon
+sa consommation).
+<ol> 
+
+
+<li>
+ Récupérez
+<tt><A HREF="./EXO4bis">
+la nouvelle version du fichier IDL.
+</A></tt>
+Avec le compilateur IDL, compilez le.
+<li> Quelles sont les classes générées par le compilateur IDL pour <tt>type_adresse</tt> et
+<tt>type_abonnement</tt>. A quoi servent elles ?
+<li> Modifiez les classes qui implantent  les interfaces IDL
+en ajoutant le code nécessaire pour les attributs <tt>adresse</tt> et <tt>abonnement</tt>.
+<li> Testez ces deux attributs en modifiant <tt>Client.java</tt>.
+</ol>
+
+
+<br>
+<br>
+<h3>
+<a name="Ref7">VII. Exercice 5 : introduction au service de désignation CORBA</a>
+</h3>
+
+
+
+
+Dans cet exercice, on teste le service de désignation
+de CORBA dont une description simplifiée 
+est donnée par le module IDL
+<tt><A HREF="./CosNaming.idl">CosNaming</A></tt>.
+La documentation concernant le service de désignation de CORBA est
+<tt><A HREF="./corba-cos-naming">ici.</A></tt> 
+
+
+Pour cet exercice,
+récupérez les fichiers
+<tt><A HREF="./EXO5">de ce répertoire</A></tt>.
+<b>Vous les stockerez tous dans le  répertoire <tt>EXO5</tt>.
+</b>
+Dans ces fichiers se trouvent deux exemples de Client/serveur
+utilisant le serveur de noms de CORBA.
+
+<ul>
+
+<li> Compilez ces exemples par la  commande :
+<p><tt>make</tt><p>
+<li> Testez le premier exemple  grâce aux commandes suivantes :
+
+<ol>
+<li>Lancez le serveur de noms CORBA grâce à la commande :
+
+<p><tt>ns&nbsp;-Djacorb.naming.ior_filename=/home/projets/singhoff/ns.ref </tt><p>
+
+où <tt>/home/projets/singhoff/ns.ref</tt> est le nom du fichier où
+vous souhaitez que l'IOR du service de nom soit mémorisé.
+<li> Lancez le serveur par :
+
+<br>
+<p><tt>jaco&nbsp;tpcorba.exo5.Serveur&nbsp;-ORBInitRef&nbsp;NameService=file:///home/projets/singhoff/ns.ref</tt></p>
+</br>
+
+<li> Où <tt>-ORBInitRef</tt> permet de définir à quel endroit le bus
+à objets peut obtenir l'IOR du service de nom.
+ Enfin, le client doit être lancé par :
+
+<br>
+<p><tt> jaco&nbsp;tpcorba.exo5.Client&nbsp;-ORBInitRef&nbsp;NameService=file:///home/projets/singhoff/ns.ref</tt></p>
+</br>
+</ol>
+
+<p>
+<b>Questions : </b>
+<p>
+<ol>
+<li>Etudiez le premier exemple constitué des 
+fichiers <tt>Client.java</tt> et
+ <tt>Serveur.java</tt>. Vous regarderez plus
+particulièrement le code précédé par les
+commentaires
+<b>ETAPE xxx</b>.
+Décrivez le traitement effectué lors de chacune de ces étapes.
+
+ <li>On regarde maintenant le deuxième exemple 
+constitué des fichiers <tt>Client_contexte.java</tt> et
+ <tt>Serveur_contexte.java</tt>. 
+Dans   
+ <tt>Serveur_contexte.java</tt>, plusieurs contextes sont 
+déclarés et utilisés. Ces contextes forment une arborescence
+de contextes et d'objets. Donnez cette arborescence.
+</ol>
+</ul>
+
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref8">VIII. Exercice 6 : construction d'une arborescence de noms </a>
+</h3>
+
+
+<p>
+<br>
+Dans cet exercice, on vous demande d'écrire un client
+qui utilise le service de désignation
+de CORBA.
+Vous devez récupérer les fichiers
+<tt><A HREF="./EXO6">de ce répertoire</A></tt>.
+<b>Vous les stockerez tous dans le  répertoire <tt>EXO6</tt>.
+</b>
+
+
+<br>
+<br>
+
+<p>
+<b>Questions : </b>
+<p>
+<li> Le programme <tt>Init.java</tt> crée un ensemble d'objets
+de type <tt>etudiant</tt> : les objets <tt>e1</tt>, 
+<tt>e2</tt>, <tt>e3</tt>, <tt>e4</tt>, <tt>e5</tt> et <tt>e6</tt>.
+On vous demande de compléter ce programme afin d'enregistrer ces
+objets dans différents contextes (les 
+contextes <tt>"IUP"</tt>, <tt>"IUP1"</tt>, <tt>"IUP2"</tt>,
+ <tt>"IUP3"</tt>, <tt>"DESS"</tt> et 
+<tt>"Effectif"</tt>) selon 
+l'arborescence
+suivante :
+
+<br>
+<p>
+<center>
+<img align = "middle"  src="gph.jpg">
+</center>  
+
+
+<p>
+<br>
+<li> Testez l'arborescence construite avec le programme
+<tt>Init.java</tt>.
+Pour ce faire, utilisez  la
+commande :
+
+<p><tt>nmg -ORBInitRef NameService=file:///home/projets/singhoff/ns.ref </p></tt>
+
+ou la commande :
+
+<p><tt>lsns -ORBInitRef NameService=file:///home/projets/singhoff/ns.ref </p></tt>
+
+Ces deux outils affichent la liste des liaisons mémorisées par un serveur de nom
+dont l'IOR est stocké dans le fichier <tt>ns.ref</tt>.
+
+
+</ol>
+
+
+</ol> 
+</ol> 
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+<p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref11">IX. Exercice 7 : Java vs C++</a>
+</h3>
+
+
+
+
+
+
+Dans cet exercice, on montre comment avec CORBA, il est possible de faire interagir
+des programmes écrits dans des langages différents.
+<br>
+<br><b>Dans un nouveau répertoire</b>,
+récupérez les fichiers suivants :
+<tt><A HREF="./EXO8/Makefile.c++">Makefile.c++</A></tt>,
+<tt><A HREF="./EXO8/Makefile.java">Makefile.java</A></tt>,
+<tt><A HREF="./EXO8/serveur.cpp">serveur.cpp</A></tt>,
+<tt><A HREF="./EXO8/client.cpp">client.cpp</A></tt>,
+<tt><A HREF="./EXO8/mo_it_impl.h">mo_it_impl.h</A></tt>,
+<tt><A HREF="./EXO8/mo_it_impl.cpp">mo_it_impl.cpp</A></tt>,
+et <tt><A HREF="./EXO8/mo_it.idl">mo_it.idl</A></tt>.
+<b>Vous les stockerez tous dans un répertoire commun</b>.
+
+
+<p>
+Travail à faire :
+<p>
+
+<ol>
+<li> Pour compiler ces programmes, tapez : 
+<tt>
+make -f Makefile.c++
+</tt>
+<li> Lancer le serveur par la commande :
+<tt>
+ serveur&
+</tt>
+<li> Lancer plusieurs fois le client par la commande  :
+<tt>
+ client num
+</tt> où <tt>num</tt> est un nombre flottant de votre choix.
+<li> Etudiez les programmes <tt>mo_it_impl.cpp</tt>, <tt>mo_it_impl.h</tt>, <tt>serveur.cpp</tt> et <tt>client.cpp</tt>.
+<li> Proposez un programme Java <tt>Client.java</tt> qui offre les mêmes fonctionnalités
+que <tt>client.cpp</tt>. Vous pourrez compiler votre client Java grâce à la 
+commande : <tt>make -f Makefile.java</tt>.
+<li> Vérifiez que le serveur peut être invoqué successivement  par le client
+Java,  puis  par le client C++, puis par le client Java, ...
+</ol>
+<br>
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref13">XI. Exercice noté de CC : systèmes de fichiers </a>
+</h3>
+<br>
+<br>
+
+Cet exercice est à déposer, au plus tard, pour le 17 février 2006
+dans le répertoire <tt>~singhoff/TP-CORBA-NOTE-2006</tt>. Vous pouvez 
+travailler en binome.
+Dans cet exercice , on vous demande d'implanter un serveur  qui permet d'accèder via
+CORBA à un mini système de fichiers.
+<A HREF="./SUPP1/files.idl">Les interfaces IDL de ce serveur sont les suivantes.</A>
+
+
+<br><br>
+Le  serveur permet de créer, lire ou écrire dans des fichiers qui
+peuvent être, soit des fichiers réguliers, soit des répertoires.
+On suppose que les fichiers réguliers sont des fichiers textes.
+Chaque fichier accessible par le serveur l'est au travers d'objets CORBA.
+Pour mettre à disposition  ce système de fichiers, deux interfaces 
+devront être implantées :
+
+<ol>
+<li> L'interface <tt>regular_file</tt>  qui permet aux clients de manipuler
+un fichier régulier particulier. 
+<li> L'interface <tt>directory</tt> qui permet aux clients de manipuler
+un répertoire donné. A partir d'un objet CORBA représentant un répertoire donné, il est
+possible d'accéder aux fichiers réguliers et aux sous répertoires qu'il
+contient.
+</ol>
+
+
+<br><br>
+Un client qui souhaite manipuler des fichiers doit donc obtenir des références d'objets
+CORBA représentant ces dits  fichiers. 
+
+<br><br>
+L'interface  <tt>regular_file</tt> contient les méthodes suivantes :
+<ol>
+<li> La méthode <tt>read</tt>. Cette méthode est une demande de lecture du
+fichier de <tt>size</tt> caractères. Le résultat de la lecture est déposé dans
+la chaîne de caractères <tt>data</tt> et la méthode retourne le nombre de
+ caractères effectivement lus.
+Chaque objet de type <tt>regular_file</tt> 
+mémorise un offset à partir duquel les lectures
+et écritures doivent être effectuées.
+
+<li>	 La méthode  <tt>write</tt>.
+ Cette méthode permet d'effectuer une écriture dans le 
+fichier de <tt>size</tt> caractères. 
+La chaîne de caractères à écrire dans le fichier est contenue dans 
+<tt>data</tt>. La méthode retourne le nombre de caractère effectivement écrits.
+
+<li> La méthode  <tt>seek</tt> positionne l'offset du fichier à la position
+<tt>new_offset</tt>.
+
+
+<li> Enfin, la méthode  <tt>close</tt> permet de fermer le fichier. Tout accès au fichier grâce à
+la référence d'objet à partir de laquelle la méthode <tt>close</tt> a été invoquée
+devient alors interdit.
+</ol>
+
+ 
+<br><br>
+L'interface  <tt>directory</tt> contient les méthodes suivantes :
+
+
+<ol>
+	 <li> L'attribut 
+ 
+<tt>number_of_file</tt> permet au client de connaître le nombre de fichiers réguliers et de sous
+répertoires inclus dans le répertoire associé à un objet CORBA de
+type <tt>directory</tt>  (répertoire que nous désignerons dans la suite par le 
+terme de "répertoire courant").
+
+
+	<li> La méthode 
+	 <tt>open_regular_file</tt>
+permet d'ouvrir un fichier régulier existant dans le  répertoire courant.
+Grâce à cette méthode, le client obtient une 
+référence d'objet CORBA associée au fichier régulier ouvert.
+<tt>name</tt> est le nom du fichier régulier à ouvrir et <tt>m</tt> le mode d'ouverture du fichier.
+Le fichier peut être ouvert :
+<ol>
+<li> En lecture seule (mode <tt>read_only</tt>) :  l'offset est alors positionné au début du
+fichier.
+<li> En écriture seule (modes <tt>write_append</tt> 
+et <tt>write_trunc</tt>). 
+Avec le mode <tt>write_append</tt>, l'offset est positionné sur la fin de fichier.
+Ce mode
+permet d'ajouter de nouvelles données dans 
+le ficher.
+Avec le  mode <tt>write_trunc</tt>, l'offset est positionné au début du fichier et  le fichier est vidé à l'ouverture. 
+Ce mode permet de réinitialiser le contenu d'un fichier régulier.
+<li> En
+ lecture et en écriture (mode <tt>read_write</tt>). L'offset est alors positionné sur le début du fichier mais le fichier n'est pas
+vidé. Les données qui seront écrites remplaceront alors celles précédemment mémorisées.
+</ol>
+
+	<li> La méthode 
+	 <tt>open_directory</tt> permet d'obtenir une référence sur un objet CORBA associé à un 
+sous répertoire existant dans le répertoire courant. <tt>name</tt> est le nom du
+sous  répertoire à ouvrir.
+
+	<li> La méthode 
+    <tt>create_regular_file</tt> permet de créer, dans le répertoire courant,
+un nouveau fichier régulier dont le nom est <tt>name</tt>.
+
+
+	<li> La méthode 
+    <tt>create_directory</tt> permet de créer, dans le répertoire courant,
+un nouveau sous répertoire dont le nom est <tt>name</tt>.
+
+	<li> La méthode 
+<tt>delete_file</tt> supprime le sous répertoire ou le fichier régulier 
+du répertoire courant dont
+le nom est <tt>name</tt>.
+
+	<li> La méthode 
+	<tt>list_files</tt>
+permet d'obtenir la liste des fichiers réguliers 
+et des sous répertoires contenus  par le répertoire courant.
+ La méthode retourne le nombre total 
+de fichiers réguliers et de sous
+répertoires contenus dans le répertoire courant. 
+La référence d'objet CORBA de type <tt>file_list</tt> est 
+un
+itérateur permettant d'obtenir, par appel 
+successif à la méthode <tt>next_one</tt>, les noms
+des différents sous répertoires et fichiers réguliers
+du répertoire courant. Lorsque la méthode <tt>next_one</tt>
+retourne <tt>false</tt>, la liste de sous répertoires et de fichiers
+réguliers a été entièrement parcourue.
+A chaque appel
+de la méthode <tt>next_one</tt>,
+une  structure <tt>directory_entry</tt> renseigne 
+pour chaque fichier son nom ainsi que son
+type (répertoire ou fichier régulier).
+
+</ol>
+<br><br><br>
+
+<h3>Travail à faire :  
+</h3>
+
+<ol>
+<li> Proposez un serveur qui implante
+les interfaces <tt>directory</tt>, <tt>regular_file</tt> et <tt>file_list</tt>. 
+Les méthodes doivent tenir compte des conditions d'erreur suivantes :
+<ul>
+<li> Accès à un fichier inexistant (exception <tt>no_such_file</tt>).
+<li> Lecture sur un fichier dont l'offset pointe après le dernier caractère
+du fichier  
+(exception <tt>end_of_file</tt>).
+<li> Demande de positionnement d'un offset erroné   
+(exception <tt>invalid_offset</tt>).
+
+<li> Demande d'opération impossible compte tenu du type de fichier.
+(exception <tt>invalid_operation</tt>)
+<li> Demande de création d'un fichier déjà existant (exception <tt>already_exist</tt>).
+</ul>
+Vous êtes libre  d'ajouter d'autres exceptions si vous estimez
+que certains cas d'erreurs doivent être traités.
+
+
+<li> Vous donnerez un client illustrant les différents
+services offerts par votre  serveur.
+
+</ol>
+
+
+<br>
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref9">XIII. Exercice supplémentaire  2 : usine  à calculatrice</a>
+</h3>
+
+
+Pour cet exercice, <b>dans un nouveau répertoire</b>,
+récupérez les fichiers suivants :
+<tt><A HREF="./SUPP2/Makefile">Makefile</A></tt>,
+<tt><A HREF="./SUPP2/Client.java">Client.java</A></tt>,
+<tt><A HREF="./SUPP2/calcul_Impl.java">calcul_Impl.java</A></tt>,
+<tt><A HREF="./SUPP2/usine_Impl.java">usine_Impl.java</A></tt>,
+<tt><A HREF="./SUPP2/Calculatrice.java">Calculatrice.java</A></tt>,
+et <tt><A HREF="./SUPP2/tpcorba.idl">tpcorba.idl</A></tt>.
+<b>Vous les stockerez tous dans un répertoire commun</b>.
+
+<p>
+
+
+On revient sur notre calculatrice mais, maintenant,
+le serveur doit 
+ gérer un ensemble de calculatrices. Pour chaque
+calculatrice, il maintient une référence sur l'objet CORBA, 
+un identifiant (un nom sous la forme d'une chaîne de caractères utilisée
+par les clients pour désigner une calculatrice particulière) ainsi
+qu'un nombre d'utilisateurs (nombre de clients qui manipulent
+la calculatrice). Ces informations doivent être encapsulées dans 
+des instances de la classe <tt>Calculatrice.java</tt>.
+L'objectif est de permettre au client de créer et
+détruire des calculatrices ; mais aussi d'utiliser
+des calculatrices précédemment créées par d'autres
+clients.
+
+<p>
+
+Dans cet exercice, il vous est demandé de&nbsp;:
+
+<ol>
+
+<li> 
+Rappel : pour déclarer plusieurs exceptions dans un fichier IDL,
+il suffit de les séparer par une virgule  ; exemple : <tt>void methode() raises (exception1, exception2, ...)</tt>.
+
+<br>
+Modifier le fichier 
+ <tt>tpcorba.idl</tt>. 
+en rédigeant pour l'interface <tt>usine</tt>
+les quatre méthodes  suivantes (n'oubliez pas de déclarer les exceptions
+utilisées par chaque méthode)&nbsp;:
+
+
+<ul>
+
+<p>
+
+<li> La méthode <tt>creation</tt> qui prend un premier paramètre
+		en <tt>inout</tt> contenant 
+		une référence sur un objet ``calcul'' 
+		ainsi qu'un
+		deuxième paramètre 
+		en <tt>in</tt> de type <tt>string</tt> désignant le
+		nom de la calculatrice à créer.
+		Cette méthode
+		doit créer une nouvelle instance de la classe 
+<tt>calcul_impl</tt>.
+Elle doit
+permettre  au client d'obtenir 
+une référence sur le nouvel objet CORBA créé.
+La méthode doit lever une exception (dont le nom sera <tt>calculatriceDejaExistante</tt>)
+si l'objet demandé existe 
+ déjà. On souhaite que le serveur  crée un nombre de calculatrice inférieur à un paramètre
+donné lors du lancement du serveur.
+Si le nombre d'objet maximal est atteint, 
+le serveur ne crée pas  d'objet et  lève
+l'exception <tt>plusDePlace</tt>.
+
+<p>
+
+<li> La méthode <tt>suppression</tt> qui prend un paramètre
+		en <tt>in</tt> de type <tt>string</tt> désignant le
+		nom de la calculatrice à détruire.
+L'objet CORBA pourra être désactivé grâce à la méthode
+<tt>deactivate_obj</tt> de la BOA (cette méthode nécessite un seul paramètre&nbsp;:&nbsp;une
+référence d'objet CORBA).
+La méthode doit lever une exception si l'objet à supprimer est encore
+utilisé ; c'est à dire si le nombre d'utilisateurs associé à l'objet
+est différent de zéro. Le nom de cette exception est <tt>calculatriceEnUtilisation</tt>.
+ De même, si le paramètre <tt>string</tt> adresse une calculatrice
+inexistante, le serveur lève l'exception <tt>calculatriceInconnue</tt>.
+
+<p>
+
+	<li> La méthode <tt>connecter</tt> qui prend un paramètre
+		en <tt>inout</tt> contenant
+		une référence sur l'objet CORBA
+		ainsi qu'un
+		deuxième paramètre 
+		en <tt>in</tt> de type <tt>string</tt> désignant le
+		nom de la calculatrice concernée.
+ Cette méthode doit incrémenter le nombre d'utilisateurs
+associé à une calculatrice. Par contre, elle ne crée pas 
+d'objet CORBA&nbsp;:&nbsp;elle permet d'avertir l'usine à objets
+qu'un client souhaite utiliser une calculatrice déjà existante.
+Elle doit
+permettre au client d'obtenir 
+une référence sur l'objet CORBA concerné.
+La méthode doit lever une exception 
+ si le paramètre <tt>string</tt> adresse une calculatrice
+inexistante (exception <tt>calculatriceInconnue</tt>).
+
+<p>
+
+<li> La méthode <tt>deconnecter</tt> qui prend un paramètre
+		en <tt>in</tt> de type <tt>string</tt> désignant le
+		nom de la calculatrice concernée.
+Cette méthode ``déconnecte'' un utilisateur d'une calculatrice.
+Elle permet d'avertir l'usine à objets  que le client ne souhaite
+plus utiliser la calculatrice.
+La méthode doit lever l'exception <tt>aucunUtilisateur</tt>
+si l'objet n'a déjà plus d'utilisateur 
+(c'est à dire si le nombre d'utilisateur associé à l'objet
+est égal à  zéro).
+ Si le paramètre <tt>string</tt> adresse une calculatrice
+inexistante, l'exception <tt>calculatriceInconnue</tt> est levée.
+
+
+</ul>
+
+
+<p>
+<li> Complétez l'implantation 
+des  interfaces  <tt>usine</tt> et <tt>calcul</tt>
+(c'est à dire les fichiers  <tt>usine_Impl.java</tt> et <tt>calcul_Impl.java</tt> ).
+
+<p>
+
+<li> Ecrire un serveur permettant de lancer l'usine à objets.
+Le nombre de calculatrices que le serveur peut allouer durant son fonctionnement doit
+être précisé par l'utilisateur lors du lancement du serveur.
+
+<p>
+<li> Tester votre application avec le client.
+
+
+</ol>
+
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<h3>
+<a name="Ref12">XIII. Exercice supplémentaire  3 : construction d'un service d'événements </a>
+</h3>
+
+
+<br>
+<br>
+
+
+
+<ADDRESS>
+Page maintenue par Frank Singhoff
+<A HREF="mailto:singhoff@univ-brest.fr">
+(singhoff@univ-brest.fr)</A> <BR>
+Derni&egrave;re mise &agrave; jour le 5 janvier 2006
+</ADDRESS>
+
+
+</body>
+</html>
+
+

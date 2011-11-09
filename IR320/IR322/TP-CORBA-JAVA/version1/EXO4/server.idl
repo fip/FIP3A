@@ -1,0 +1,41 @@
+
+
+module tpcorba {
+  module exo4 {
+
+	exception numeroInconnu {};
+	exception dejaExistant {};
+
+
+	interface abonne {
+
+		readonly attribute long numero;
+		readonly attribute string nom_prenom;
+
+	};
+
+
+
+	interface gestionabonnes{
+
+	
+		void creation_abonne(in long numero,
+				    in string nom,
+				    in string prenom,
+				    inout abonne ref)
+			raises (dejaExistant);
+
+		void resilier_abonne(in long numero)
+			raises (numeroInconnu);
+
+		void rechercher_abonne(in long numero,
+				inout abonne ref)
+			raises (numeroInconnu);
+		
+	  };
+
+	};
+
+};
+
+

@@ -1,0 +1,28 @@
+
+
+module tpcorba {
+
+   module exo3 {
+
+	interface compte;
+
+	interface compte {
+
+		readonly attribute long numero_compte;
+		readonly attribute string titulaire;
+		readonly attribute double solde;
+	
+
+		void nombre_operations(out long nombre);
+		void debiter(in double montant);
+		void crediter(in double montant);
+
+		void prelevement(in double montant, in compte destination);
+	};
+
+	interface allocateur {
+		void nouveau_compte(inout compte cpt, in string titulaire,
+			in long numero_compte);
+	};
+   };
+};

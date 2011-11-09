@@ -1,0 +1,69 @@
+
+
+module events {
+
+
+
+	exception disconnected{};
+	exception alreadyConnected{};
+
+
+
+	interface PushConsumer {
+		void push(in any e) 
+			raises (disconnected);
+		void disconnect_push_consumer();
+	};
+
+	interface PushSupplier {
+		void disconnect_push_supplier();
+	};
+		
+	interface PullSupplier {
+		any pull() 
+			raises (disconnected);
+		void disconnect_pull_supplier();
+	};
+
+	interface PullConsumer {
+		void disconnect_pull_consumer();
+	};
+
+
+	interface EventChannel;
+	interface EventChannel {
+
+		readonly attribute string name;
+		readonly attribute boolean supplierConnected;
+
+
+		// Consumers
+		//
+		void connect_PullConsumer(in PullConsumer remote, out PullSupplier into_channel);
+
+		void connect_PushConsumer(in PushConsumer remote, out PushSupplier into_channel);
+
+
+
+		// Supplier (including channels)
+		//
+		void connect_PullSupplier(in PullSupplier remote, out PullConsumer into_channel)
+			raises (alreadyConnected);
+		
+		void connect_PushSupplier(in PushSupplier remote, out PushConsumer into_channel)
+			raises (alreadyConnected);
+		
+		void connect_EventChannel(in EventChannel supplier)
+			raises (alreadyConnected);
+
+
+	};
+
+
+	interface ChannelFactory {
+
+		void get_channel(inout EventChannel ref, in string name);
+
+	};
+		
+};

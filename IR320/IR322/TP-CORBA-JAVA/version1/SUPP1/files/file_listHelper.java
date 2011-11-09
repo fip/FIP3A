@@ -1,0 +1,83 @@
+package files;
+
+
+/**
+ *	Generated from IDL interface "file_list"
+ *	@author JacORB IDL compiler V 2.2.2, 1-Jun-2005
+ */
+
+public final class file_listHelper
+{
+	public static void insert (final org.omg.CORBA.Any any, final files.file_list s)
+	{
+			any.insert_Object(s);
+	}
+	public static files.file_list extract(final org.omg.CORBA.Any any)
+	{
+		return narrow(any.extract_Object()) ;
+	}
+	public static org.omg.CORBA.TypeCode type()
+	{
+		return org.omg.CORBA.ORB.init().create_interface_tc("IDL:files/file_list:1.0", "file_list");
+	}
+	public static String id()
+	{
+		return "IDL:files/file_list:1.0";
+	}
+	public static file_list read(final org.omg.CORBA.portable.InputStream in)
+	{
+		return narrow(in.read_Object());
+	}
+	public static void write(final org.omg.CORBA.portable.OutputStream _out, final files.file_list s)
+	{
+		_out.write_Object(s);
+	}
+	public static files.file_list narrow(final java.lang.Object obj)
+	{
+		if (obj instanceof files.file_list)
+		{
+			return (files.file_list)obj;
+		}
+		else if (obj instanceof org.omg.CORBA.Object)
+		{
+			return narrow((org.omg.CORBA.Object)obj);
+		}
+		throw new org.omg.CORBA.BAD_PARAM("Failed to narrow in helper");
+	}
+	public static files.file_list narrow(final org.omg.CORBA.Object obj)
+	{
+		if (obj == null)
+			return null;
+		try
+		{
+			return (files.file_list)obj;
+		}
+		catch (ClassCastException c)
+		{
+			if (obj._is_a("IDL:files/file_list:1.0"))
+			{
+				files._file_listStub stub;
+				stub = new files._file_listStub();
+				stub._set_delegate(((org.omg.CORBA.portable.ObjectImpl)obj)._get_delegate());
+				return stub;
+			}
+		}
+		throw new org.omg.CORBA.BAD_PARAM("Narrow failed");
+	}
+	public static files.file_list unchecked_narrow(final org.omg.CORBA.Object obj)
+	{
+		if (obj == null)
+			return null;
+		try
+		{
+			return (files.file_list)obj;
+		}
+		catch (ClassCastException c)
+		{
+				files._file_listStub stub;
+				stub = new files._file_listStub();
+				stub._set_delegate(((org.omg.CORBA.portable.ObjectImpl)obj)._get_delegate());
+				return stub;
+		}
+	}
+}

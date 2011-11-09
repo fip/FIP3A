@@ -1,0 +1,16 @@
+
+
+module tpcorba {
+
+    module exo5 {
+
+	interface  etudiant {
+
+		readonly attribute string nom;
+		readonly attribute string prenom;
+
+	};
+
+   };
+
+};

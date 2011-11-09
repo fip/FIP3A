@@ -1,0 +1,18 @@
+
+
+module tpcorba {
+
+  module exo1 {
+
+
+
+        interface calcul  {
+
+                void incrementer(inout long data);
+                void decrementer(inout long data);
+
+        };
+  };
+};
+
+

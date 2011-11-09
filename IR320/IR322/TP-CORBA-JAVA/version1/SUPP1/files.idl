@@ -1,0 +1,70 @@
+module files {
+
+
+  exception no_such_file {};
+  exception end_of_file {};
+  exception invalid_offset {};
+  exception invalid_type_file {};
+  exception invalid_operation{};
+  exception already_exist {};
+	
+
+  interface regular_file {
+
+    long read(in long size, inout string data)
+        raises (end_of_file,invalid_operation);
+
+    long write(in long size, in string data)
+        raises (invalid_operation);
+
+    void seek(in long new_offset)
+        raises (invalid_offset,invalid_operation);
+
+    void close();
+  };
+
+
+  enum mode {read_only, write_append, write_trunc, read_write};
+  enum file_type {regular_file_type, directory_type};
+
+  struct directory_entry {
+    string name;
+    file_type type;
+  };
+
+
+  interface file_list {
+    boolean next_one(inout directory_entry e);
+  };
+
+
+  interface directory;
+  interface directory {
+
+    readonly attribute long number_of_file;
+
+    void open_regular_file(inout regular_file r, in string name, in mode m) 
+        raises (invalid_type_file, no_such_file);
+
+    void open_directory(inout directory f, in string name)
+        raises (invalid_type_file, no_such_file);
+
+    void create_regular_file(inout regular_file r, in string name)
+        raises (already_exist);
+
+    void create_directory(inout directory f, in string name)
+        raises (already_exist);
+
+    void delete_file(in string name)
+        raises (no_such_file);
+
+    long list_files(inout file_list l);
+  };
+
+};
+
+
+
+
+
+

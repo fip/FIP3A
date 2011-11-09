@@ -1,0 +1,22 @@
+
+
+module tpcorba {
+
+    module exo6 {
+
+	interface  etudiant {
+
+		readonly attribute string nom;
+		readonly attribute string prenom;
+
+	};
+
+
+	interface usine {
+		etudiant inscription_d_un_etudiant(in string nom, 
+				in string prenom);
+	};
+
+   };
+
+};

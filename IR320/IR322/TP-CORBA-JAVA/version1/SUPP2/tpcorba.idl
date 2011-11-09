@@ -1,0 +1,41 @@
+
+
+
+module tpcorba {
+
+
+	exception divisionParZero {};
+
+
+	interface calcul  {
+
+		readonly attribute double memoire;
+
+		
+		***
+		***
+		***
+		***
+		
+		void diviseMemoire(in double donnee) raises (divisionParZero); 
+
+
+		void incrementer(inout long data);
+		void decrementer(inout long data);
+
+
+	};
+
+
+	exception *** {};
+	*
+	*	
+
+	interface  usine  {
+
+
+		****
+
+	};
+
+};

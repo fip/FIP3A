@@ -1,0 +1,12 @@
+
+module mon_module {
+
+	interface mon_interface 
+	{
+    		void modifier(in double d);
+    		void consulter(inout double d);
+	};
+
+};
+
+

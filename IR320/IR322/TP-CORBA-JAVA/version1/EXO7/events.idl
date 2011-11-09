@@ -1,0 +1,31 @@
+
+
+module events {
+
+
+
+	exception disconnected{};
+
+
+	interface PushConsumer {
+		void push(in any e) 
+			raises (disconnected);
+		void disconnect_push_consumer();
+	};
+
+	interface PushSupplier {
+		void disconnect_push_supplier();
+	};
+		
+	interface PullSupplier {
+		any pull() 
+			raises (disconnected);
+		void disconnect_pull_supplier();
+	};
+
+	interface PullConsumer {
+		void disconnect_pull_consumer();
+	};
+
+
+};

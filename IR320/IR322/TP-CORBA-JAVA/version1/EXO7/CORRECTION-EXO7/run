@@ -1,0 +1,7 @@
+
+java com.ooc.CosNaming.Server -OAhost beru -OAport 5000 
+
+java etudiants.Serveur -ORBservice NameService iiop://beru:5000/NameService
+
+java etudiants.Client -ORBservice NameService iiop://beru:5000/NameService
+
