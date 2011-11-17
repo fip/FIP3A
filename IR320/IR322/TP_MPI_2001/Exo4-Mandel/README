@@ -1,0 +1,14 @@
+mandel-basic-mpi.c permet de réaliser un calcul de mandel avec un partage des
+tâches entre plusieurs hosts (partage du travail en blocs)
+
+Usage : 
+./mpirun --np <nb process>  --hostfile <hôtes> mandel-basic-mpi <taille bloc>
+
+TODO :
+-Ajouter des options de compilation
+-Gérer des tailles d'images qui ne sont pas % la taille des blocs
+-Utiliser une allocation dynamique de la mémoire
+
+
+perfs.sh permet juste de lancer automatiquement des tâches avec un nombre de
+processus différents.
