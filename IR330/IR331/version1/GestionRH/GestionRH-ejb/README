@@ -1,0 +1,12 @@
+Création de la BDD
+
+CREATE DATABASE gestionrh
+  WITH ENCODING='UTF8'
+       OWNER=bdd1
+       LC_COLLATE='fr_FR.UTF-8'
+       LC_CTYPE='fr_FR.UTF-8'
+       CONNECTION LIMIT=-1;
+
+
+Télécharger la librairie http://www.java2s.com/Code/JarDownload/commons-lang-2.4.jar.zip 
+Et l'ajouter à GestionRH-WAR
