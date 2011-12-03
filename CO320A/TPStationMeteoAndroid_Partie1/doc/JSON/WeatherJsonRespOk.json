@@ -1,0 +1,111 @@
+{
+  "data": {
+    "current_condition": [
+      {
+        "cloudcover": "75",
+        "humidity": "94",
+        "observation_time": "01:21 PM",
+        "precipMM": "0.4",
+        "pressure": "1020",
+        "temp_C": "17",
+        "temp_F": "63",
+        "visibility": "10",
+        "weatherCode": "176",
+        "weatherDesc": [
+          {
+            "value": "Patchy rain nearby"
+          }
+        ],
+        "weatherIconUrl": [
+          {
+            "value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0009_light_rain_showers.png"
+          }
+        ],
+        "winddir16Point": "WSW",
+        "winddirDegree": "240",
+        "windspeedKmph": "19",
+        "windspeedMiles": "12"
+      }
+    ],
+    "request": [
+      {
+        "query": "Brest, France",
+        "type": "City"
+      }
+    ],
+    "weather": [
+      {
+        "date": "2010-10-27",
+        "precipMM": "1.8",
+        "tempMaxC": "16",
+        "tempMaxF": "60",
+        "tempMinC": "13",
+        "tempMinF": "55",
+        "weatherCode": "176",
+        "weatherDesc": [
+          {
+            "value": "Patchy rain nearby"
+          }
+        ],
+        "weatherIconUrl": [
+          {
+            "value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0009_light_rain_showers.png"
+          }
+        ],
+        "winddir16Point": "WSW",
+        "winddirDegree": "255",
+        "winddirection": "WSW",
+        "windspeedKmph": "30",
+        "windspeedMiles": "19"
+      },
+      {
+        "date": "2010-10-28",
+        "precipMM": "0.2",
+        "tempMaxC": "16",
+        "tempMaxF": "60",
+        "tempMinC": "13",
+        "tempMinF": "55",
+        "weatherCode": "116",
+        "weatherDesc": [
+          {
+            "value": "Partly Cloudy"
+          }
+        ],
+        "weatherIconUrl": [
+          {
+            "value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png"
+          }
+        ],
+        "winddir16Point": "SSW",
+        "winddirDegree": "202",
+        "winddirection": "SSW",
+        "windspeedKmph": "27",
+        "windspeedMiles": "17"
+      },
+      {
+        "date": "2010-10-29",
+        "precipMM": "6.0",
+        "tempMaxC": "17",
+        "tempMaxF": "63",
+        "tempMinC": "11",
+        "tempMinF": "52",
+        "weatherCode": "116",
+        "weatherDesc": [
+          {
+            "value": "Partly Cloudy"
+          }
+        ],
+        "weatherIconUrl": [
+          {
+            "value": "http://www.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png"
+          }
+        ],
+        "winddir16Point": "S",
+        "winddirDegree": "187",
+        "winddirection": "S",
+        "windspeedKmph": "32",
+        "windspeedMiles": "20"
+      }
+    ]
+  }
+}
