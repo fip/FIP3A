@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical" android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:background="@color/blue_enstb"
+  android:padding="5dip">
+
+  <LinearLayout android:id="@+id/LinearLayout01"
+    android:layout_height="wrap_content" android:orientation="horizontal"
+    android:layout_width="fill_parent">
+    <TableLayout android:id="@+id/TableLayout01"
+      android:layout_height="wrap_content" android:orientation="vertical"
+      android:layout_width="fill_parent">
+      <TableRow android:id="@+id/TableRow01"
+        android:layout_height="wrap_content" android:weightSum="0"
+        android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextView01"
+          android:layout_width="wrap_content" android:layout_height="wrap_content"
+          android:text="Country"></TextView>
+        <EditText android:layout_height="wrap_content"
+          android:text="France" android:id="@+id/countryTxtEdit"
+          android:hint="country" android:layout_width="wrap_content"
+          android:layout_weight="1"></EditText>
+
+      </TableRow>
+      <TableRow android:id="@+id/TableRow02"
+        android:layout_height="wrap_content" android:weightSum="1"
+        android:layout_width="fill_parent">
+        <TextView android:id="@+id/TextView02"
+          android:layout_width="wrap_content" android:layout_height="wrap_content"
+          android:text="City"></TextView>
+        <EditText android:layout_height="wrap_content"
+          android:text="Brest" android:id="@+id/cityTxtEdit"
+          android:hint="city" android:layout_weight="1"
+          android:layout_width="wrap_content"></EditText>
+      </TableRow>
+
+      <Button android:layout_height="wrap_content" android:text="SEARCH"
+        android:id="@+id/searchButton" android:layout_width="fill_parent"
+        android:textSize="20dip"></Button>
+    </TableLayout>
+  </LinearLayout>
+
+  <View android:layout_width="wrap_content" android:id="@+id/View01"
+    android:background="@color/green_enstb" android:layout_height="2dip"
+    android:layout_marginBottom="5dip" android:layout_marginTop="5dip"></View>
+
+  <ScrollView android:id="@+id/ScrollView01"
+    android:orientation="vertical" android:scrollbars="vertical"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    android:scrollbarFadeDuration="1000"
+    android:scrollbarDefaultDelayBeforeFade="2000">
+    <LinearLayout android:id="@+id/LinearLayout02"
+      android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:orientation="vertical">
+      <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/currentWeatherTitle"
+        android:layout_gravity="center_horizontal" android:text="ville - xx:xx xx"
+        android:textSize="15dip"></TextView>
+      <LinearLayout android:layout_height="wrap_content"
+        android:id="@+id/TodayForecastLayout" android:orientation="horizontal"
+        android:layout_width="fill_parent">
+
+        <TableLayout android:id="@+id/TableLayout02"
+          android:layout_height="wrap_content" android:layout_width="wrap_content"
+          android:orientation="vertical">
+
+          <TableRow android:layout_height="wrap_content"
+            android:id="@+id/DescripRow" android:layout_width="wrap_content">
+            <TextView android:id="@+id/TextView05"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Desc:" android:textSize="15dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/DescriptionText"
+              android:textSize="20dip" android:layout_marginLeft="2dip"
+              android:text="xxxxx" android:layout_span="4"></TextView>
+          </TableRow>
+          <TableRow android:layout_height="wrap_content"
+            android:id="@+id/TempRow" android:layout_width="wrap_content">
+            <TextView android:id="@+id/TextView05"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical" android:text="Temp:"
+              android:textSize="15dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/TemperatureText"
+              android:textSize="20dip" android:layout_marginLeft="2dip"
+              android:text="xxx"></TextView>
+
+            <TextView android:id="@+id/TextView03"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Cloud Cover:" android:textSize="15dip"
+              android:layout_marginLeft="5dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/CloudCoverTxtView"
+              android:layout_marginLeft="2dip" android:textSize="20dip"
+              android:text="xx"></TextView>
+          </TableRow>
+        </TableLayout>
+        <ImageView android:layout_height="wrap_content"
+          android:layout_width="fill_parent" android:layout_gravity="center"
+          android:id="@+id/Desc0ImageView" android:src="@drawable/icon"></ImageView>
+      </LinearLayout>
+      <View android:layout_width="wrap_content" android:id="@+id/View01"
+        android:background="@color/green_enstb" android:layout_height="2dip"
+        android:layout_marginBottom="5dip" android:layout_marginTop="5dip"></View>
+    
+    <!-- Forecast D+1 -->
+      <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:id="@+id/forecastD1WeatherTitle"
+        android:layout_gravity="center_horizontal" android:text="ville - xx:xx AM"
+        android:textSize="15dip"></TextView>
+      <LinearLayout android:layout_height="wrap_content"
+        android:id="@+id/ForecastD1Layout" android:orientation="horizontal"
+        android:layout_width="fill_parent">
+        <TableLayout android:id="@+id/ForecastD1TableLayout"
+          android:layout_height="wrap_content" android:layout_width="wrap_content"
+          android:orientation="vertical">
+          <TableRow android:layout_height="wrap_content"
+            android:id="@+id/DescRowD1" android:layout_width="wrap_content">
+            <TextView android:id="@+id/DescLabelD1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Desc:" android:textSize="15dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/DescTextD1"
+              android:textSize="20dip" android:layout_marginLeft="2dip"
+              android:text="xxxxx" android:layout_span="4"></TextView>
+          </TableRow>
+          <TableRow android:layout_height="wrap_content"
+            android:id="@+id/TempRowD1" android:layout_width="wrap_content">
+            <TextView android:id="@+id/TempMinLabelD1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical" android:text="Temp Min:"
+              android:textSize="15dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/TempMinTextD1"
+              android:textSize="20dip" android:layout_marginLeft="2dip"
+              android:text="xxx"></TextView>
+              <TextView android:id="@+id/TempMaxLabelD1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical" android:text="Temp Max:"
+              android:textSize="15dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/TempMaxTextD1"
+              android:textSize="20dip" android:layout_marginLeft="2dip"
+              android:text="xxx"></TextView>
+			</TableRow>
+			<TableRow android:layout_height="wrap_content"
+            android:id="@+id/RainRowD1" android:layout_width="wrap_content">
+            <TextView android:id="@+id/RainLabelD1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Rain:" android:textSize="15dip"
+              android:layout_marginLeft="5dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/RainTextD1"
+              android:layout_marginLeft="2dip" android:textSize="20dip"
+              android:text="xx"></TextView>
+          </TableRow>
+          <TableRow android:layout_height="wrap_content"
+            android:id="@+id/WindRowD1" android:layout_width="wrap_content">
+            <TextView android:id="@+id/WindSpeedLabelD1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Wind Speed:" android:textSize="15dip"
+              android:layout_marginLeft="5dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/WindSpeedTextD1"
+              android:layout_marginLeft="2dip" android:textSize="20dip"
+              android:text="xx"></TextView>
+              <TextView android:id="@+id/WindDirLabelD1"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:text="Wind Dir:" android:textSize="15dip"
+              android:layout_marginLeft="5dip"></TextView>
+            <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content" android:id="@+id/WindDirTextD1"
+              android:layout_marginLeft="2dip" android:textSize="20dip"
+              android:text="xx"></TextView>
+          </TableRow>
+        </TableLayout>
+        <ImageView android:layout_height="wrap_content"
+          android:layout_width="fill_parent" android:layout_gravity="center"
+          android:id="@+id/Desc1ImageView" android:src="@drawable/icon"></ImageView>
+      </LinearLayout>
+      <View android:layout_width="wrap_content" android:id="@+id/View02"
+        android:background="@color/green_enstb" android:layout_height="2dip"
+        android:layout_marginBottom="5dip" android:layout_marginTop="5dip"></View>
+     <!-- End of forecast D+1 -->
+    </LinearLayout>
+    
+  </ScrollView>
+</LinearLayout>
